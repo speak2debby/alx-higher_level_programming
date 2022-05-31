@@ -1,26 +1,27 @@
 #include "lists.h"
 
 /**
- * check_cycle - checks to see if a list is in an endless loop or cycle
- * @list: the list to check
- * Return: 0 if no cycle is detected, 1 if there is a cycle
+ * check_cycle - checks if linked list has a cycle
+ * @list: node in linked list
+ *
+ * Return: 0 if there is no cycle, 1 if there is a cycle
  */
-
 int check_cycle(listint_t *list)
 {
-	listint_t *doub = list;
-	listint_t *reg = list;
+	listint_t *i = list;
 
-	if (list == NULL)
+	if (!list)
 		return (0);
 
-	while (doub && doub->next)
+	list = list->next;
+	while (list)
 	{
-		reg = reg->next;
-		doub = doub->next->next;
-
-		if (reg == doub)
+		if (i == list)
 			return (1);
+		if (!(list->next) || !(list->next->next))
+			return (0);
+		i = i->next;
+		list = list->next->next;
 	}
 	return (0);
 }
